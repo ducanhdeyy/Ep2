@@ -19,3 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/song', [SongController::class, 'index']);
+Route::get('/singer', [SongController::class, 'index']);
+Route::get('/album', [SongController::class, 'index']);
