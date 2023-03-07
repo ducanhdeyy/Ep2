@@ -33,7 +33,7 @@
                 <nav class="iq-sidebar-menu">
                     <ul id="iq-sidebar-toggle" class="iq-menu">
                         <li>
-                            <a href="{{route('admin.index')}}" class="iq-waves-effect"><i class="las la-house-damage"></i><span>Dashboard</span></a>
+                            <a href="{{route('dashboard')}}" class="iq-waves-effect"><i class="las la-house-damage"></i><span>Dashboard</span></a>
                         </li>
                         <li>
                             <a href="{{route('category.index')}}" class="iq-waves-effect"><i class="ri-function-line"></i><span>Category</span></a>

@@ -33,13 +33,15 @@
                     <div class="sign-user_card ">
                         <div class="d-flex justify-content-center">
                             <div class="sign-user_logo">
-                                <img src="assets/admin/images/login/music-icon.jpg" class=" img-fluid" alt="Logo">
+                                <img src="{{url('view/images/login/music-icon.jpg')}}" class=" img-fluid" alt="Logo">
                             </div>
                         </div>
                         <div class="sign-in-page-data">
                             <div class="sign-in-from w-100 m-auto pt-5">
                                 <h1 class="mb-3 text-center">Sign Up</h1>
-                                <form class="mt-4 form-validate" method="post" action="{{route('login.store')}}">
+                                <x-alert/>
+                                <form class="mt-4 form-validate" method="post" action="{{route('admin.store')}}">
+                                    @csrf
                                     <div class="form-group">
                                         <label for="exampleInputEmail2">Your Full Name</label>
                                         <input type="text" name="name" class="form-control mb-0" id="exampleInputEmail2" placeholder="Your Full Name">
@@ -56,10 +58,6 @@
                                         <label for="exampleInputPassword2">Password</label>
                                         <input type="password" name="password" class="form-control mb-0" id="password" placeholder="Password">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword2">Repeat Password</label>
-                                        <input type="password" name="confirm_password"class="form-control mb-0" id="exampleInputPassword2" placeholder="Confirm Password">
-                                    </div>
                                     <div class="sign-info text-danger">
                                     </div>
                                     <div class="sign-info mt-3">
@@ -69,7 +67,7 @@
                             </div>
                             <div class="mt-2">
                                 <div class="d-flex justify-content-center links">
-                                    Already have an account ? <a href="{{route('login.index')}}" class="ml-2">Login</a>
+                                    Already have an account ? <a href="{{route('login')}}" class="ml-2">Login</a>
                                 </div>
                             </div>
                         </div>

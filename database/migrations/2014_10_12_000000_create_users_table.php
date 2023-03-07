@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->integer('phone_number');
             $table->string('password');
-            $table->integer('wallet');
+            $table->integer('wallet')->nullable();
             $table->integer('role')->default(0);
             $table->timestamps();
         });

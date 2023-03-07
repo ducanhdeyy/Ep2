@@ -39,7 +39,9 @@
                         <div class="sign-in-page-data">
                             <div class="sign-in-from w-100 pt-5 m-auto">
                                 <h1 class="mb-3 text-center">Sign in</h1>
-                                <form class="mt-4 form-validate" method="post" action="index.php?controller=login&action=login">
+                                <x-alert/>
+                                <form class="mt-4 form-validate" method="post" action="{{route('admin.login')}}">
+                                    @csrf
                                     <div class="form-group">
                                         <label for="exampleInputEmail2">Email address</label>
                                         <input type="email" name="email" class="form-control mb-0" id="exampleInputEmail2" placeholder="Enter email">
@@ -64,7 +66,7 @@
                         </div>
                         <div class="mt-2">
                             <div class="d-flex justify-content-center links">
-                                Don't have an account? <a href="{{route('login.create')}}" class="ml-2">Sign Up</a>
+                                Don't have an account? <a href="{{route('admin.register')}}" class="ml-2">Sign Up</a>
                             </div>
                             <div class="d-flex justify-content-center links">
                                 <a href="#developing">Forgot your password?</a>

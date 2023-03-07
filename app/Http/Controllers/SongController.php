@@ -52,7 +52,7 @@ class SongController extends Controller
             $file = $request->image;
             $imageName = $file->getClientOriginalName();
             $file->move(public_path('uploads/img'),$imageName);
-            $song['image_patch'] = $imageName;
+            $song['image_path'] = $imageName;
         }
 
         if($request->hasFile('audio')){
