@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\SongController;
+use App\Http\Controllers\Client\LoginController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,3 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/song', [SongController::class, 'index']);
 Route::get('/singer', [SongController::class, 'index']);
 Route::get('/album', [SongController::class, 'index']);
+Route::post('/login', [LoginController::class,'login']);

@@ -3,22 +3,20 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
-use App\Models\song;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
-class SongController extends Controller
+class LoginController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $songs = Song::all();
-        foreach ($songs as $song){
-            $song['file_url'] = 'http://127.0.0.1:8000/uploads/'. $song->file_url;
-            $song['singer_name'] = $song->singer->name;
-        }
-        return response()->json($songs);
+        //
     }
 
     /**
@@ -67,5 +65,18 @@ class SongController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function login(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $credentials = $request->only('email', 'password');
+        $user = User::all();
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            $token = $user->createToken('authToken')->accessToken;
+            return response()->json(['token' => $token], 200);
+        } else {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
     }
 }
