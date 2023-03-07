@@ -31,15 +31,15 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::resource('singer', SingerController::class);
     Route::resource('album', AlbumController::class);
     Route::resource('song', SongController::class);
-    Route::resource('user', UserController::class); 
+    Route::resource('user', UserController::class);
     Route::resource('transaction', TransactionController::class);
 });
 
-Route::get('login', [AdminController::class,'index'])->name('login');
-Route::get('register',[AdminController::class,'create'])->name('admin.register');
-Route::post('register',[AdminController::class,'store'])->name('admin.store');
-Route::post('login',[AdminController::class,'login'])->name('admin.login');
-Route::get('logout',[AdminController::class,'logout'])->name('admin.logout');
-    
+Route::get('/login', [AdminController::class,'index'])->name('login');
+Route::get('/register',[AdminController::class,'create'])->name('admin.register');
+Route::post('/register',[AdminController::class,'store'])->name('admin.store');
+Route::post('/login',[AdminController::class,'login'])->name('admin.login');
+Route::get('/logout',[AdminController::class,'logout'])->name('admin.logout');
+
 
 

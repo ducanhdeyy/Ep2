@@ -11,7 +11,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class User extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory,HasApiTokens, AuthorizesRequests;
     protected $fillable = ['id','name','email','phone_number','wallet'];
 
     public function trans()

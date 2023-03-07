@@ -19,7 +19,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/song', [SongController::class, 'index']);
-Route::get('/singer', [SongController::class, 'index']);
-Route::get('/album', [SongController::class, 'index']);
+
+Route::middleware('auth:api')->group(function (){
+    Route::get('/song', [SongController::class, 'index']);
+    Route::get('/singer', [SongController::class, 'index']);
+    Route::get('/album', [SongController::class, 'index']);
+
+});
+
 Route::post('/login', [LoginController::class,'login']);
