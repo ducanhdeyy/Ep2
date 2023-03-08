@@ -21,13 +21,6 @@
                         <span class="text-primary text-uppercase">Spotify</span>
                     </div>
                 </a>
-                <div class="iq-menu-bt-sidebar">
-                    <div class="iq-menu-bt align-self-center">
-                        <div class="wrapper-menu">
-                            <div class="main-circle"><i class="las la-bars"></i></div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div id="sidebar-scrollbar">
                 <nav class="iq-sidebar-menu">

@@ -7,3 +7,14 @@
         </ul>
     </div>
 @endif
+
+@if (Session::has('error'))
+    <div class="alert alert-danger">
+        <div>{{Session::get('error')}}</div>
+    </div>
+@endif
+@if (Session::has('success'))
+    <div class="alert alert-success">
+        <div>{{Session::get('success')}}</div>
+    </div>
+@endif

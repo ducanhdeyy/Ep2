@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\album;
-use App\Models\singer;
+use App\Http\Requests\UpdateAlbum;
+use App\Models\Album;
+use App\Models\Singer;
 use Illuminate\Http\Request;
 
 class AlbumController extends Controller
@@ -14,8 +15,8 @@ class AlbumController extends Controller
     public function index()
     {
         //
-        $album = album::orderBy('created_at','DESC')->paginate(2);
-        return view('admin.album.index',compact('album'));
+        $album = Album::orderBy('created_at', 'DESC')->paginate(2);
+        return view('admin.album.index', compact('album'));
     }
 
     /**
@@ -24,8 +25,8 @@ class AlbumController extends Controller
     public function create()
     {
         //
-        $singer = singer::all();
-        return view('admin.album.add',compact('singer'));
+        $singer = Singer::all();
+        return view('admin.album.add', compact('singer'));
     }
 
     /**
@@ -34,17 +35,21 @@ class AlbumController extends Controller
     public function store(Request $request)
     {
         //
-        if($request->hasFile('file')){
+        $albums = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'singer_id' => $request->singer_id
+        ];
+        if ($request->hasFile('file')) {
             $file = $request->file;
-            $fileName = $file->getClientOriginalName();
-            $file->move(public_path('uploads'),$fileName);
-        }else{
-            $fileName = '';
+            $imageName = $file->getClientOriginalName();
+            $file->move(public_path('uploads/img'), $imageName);
+            $song['image_path'] = $imageName;
         }
-        $request->merge(['image_path'=>$fileName]);
-        $albums = album::create($request->all());
+        $request->merge(['image_path' => $imageName]);
+        $albums = Album::create($albums);
         return redirect()->route('album.index');
-        
+
     }
 
     /**
@@ -61,27 +66,32 @@ class AlbumController extends Controller
     public function edit(string $id)
     {
         //
-        $singer = singer::all();
-        $alb = album::find($id);
-        return view('admin.album.edit',compact('alb','singer'));
+        $singer = Singer::all();
+        $alb = Album::find($id);
+        return view('admin.album.edit', compact('alb', 'singer'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateAlbum $request, string $id)
     {
         //
-        if($request->hasFile('file')){
+        $album = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'singer_id' => $request->singer_id
+        ];
+
+        if ($request->hasFile('file')) {
             $file = $request->file;
-            $fileName = $file->getClientOriginalName();
-            $file->move(public_path('uploads/img'),$fileName);
-        }else{
-            $fileName = '';
+            $imageName = $file->getClientOriginalName();
+            $file->move(public_path('uploads/img'), $imageName);
+            $album['image_path'] = $imageName;
         }
-        $request->merge(['image_path'=>$fileName]);
-        $alb = album::find($id)->update($request->all());
-        return redirect()->route('album.index');
+        return Album::find($id)->update($album)
+            ? redirect()->route('album.index')->with('success', 'You are update success')
+            : redirect()->route('album.edit', $id)->with('error', 'You are update failed');
     }
 
     /**
@@ -90,7 +100,7 @@ class AlbumController extends Controller
     public function destroy(string $id)
     {
         //
-        $albums = album::find($id)->delete();
+        $albums = Album::find($id)->delete();
         return redirect()->back();
     }
 }

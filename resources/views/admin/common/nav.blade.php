@@ -19,9 +19,6 @@
                 <i class="ri-menu-3-line"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="list-unstyled iq-menu-top d-flex justify-content-between mb-0 p-0">
-                    Hello Mr.Tu
-                </ul>
                 <ul class="navbar-nav ml-auto navbar-list">
                     <li class="nav-item nav-icon">
                         <div class="iq-search-bar">

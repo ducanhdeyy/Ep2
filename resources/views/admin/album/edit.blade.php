@@ -6,6 +6,7 @@
         </div>
     </div>
     <div class="iq-card-body">
+        <x-alert/>
         <form class="form-validate" method="post" action="{{route('album.update',$alb)}}" enctype="multipart/form-data">
             @csrf
             @method('PUT')

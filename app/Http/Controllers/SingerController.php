@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateSinger;
 use App\Http\Requests\UpdateSinger;
-use App\Models\singer;
+use App\Models\Singer;
 use Illuminate\Http\Request;
 
 class SingerController extends Controller
@@ -15,7 +15,7 @@ class SingerController extends Controller
     public function index()
     {
         //
-        $singer = singer::orderBy('created_at','DESC')->paginate(2);
+        $singer = Singer::orderBy('created_at','DESC')->paginate(2);
         return view('admin.singer.index',compact('singer'));
     }
 
@@ -42,7 +42,7 @@ class SingerController extends Controller
             $fileName = '';
         }
         $request->merge(['image_path'=>$fileName]);
-        $singers = singer::create($request->all());
+        $singers = Singer::create($request->all());
         return redirect()->route('singer.index');
     }
 
@@ -60,14 +60,14 @@ class SingerController extends Controller
     public function edit(string $id)
     {
         //
-        $sing = singer::find($id);
+        $sing = Singer::find($id);
         return view('admin.singer.edit',compact('sing'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSinger $request, string $id)
+    public function update(Request $request, string $id)
     {
         //
         if($request->hasFile('file')){
@@ -78,7 +78,7 @@ class SingerController extends Controller
             $fileName = '';
         }
         $request->merge(['image_path'=>$fileName]);
-        $sing = singer::find($id)->update($request->all());
+        $sing = Singer::find($id)->update($request->all());
         return redirect()->route('singer.index');
     }
 
@@ -88,7 +88,7 @@ class SingerController extends Controller
     public function destroy(string $id)
     {
         //
-        $singer = singer::find($id)->delete();
+        $singer = Singer::find($id)->delete();
         return redirect()->back();
     }
 }

@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\createSong;
 use App\Http\Requests\updateSong;
-use App\Models\album;
-use App\Models\category;
-use App\Models\singer;
-use App\Models\song;
+use App\Models\Album;
+use App\Models\Category;
+use App\Models\Singer;
+use App\Models\Song;
 use Illuminate\Http\Request;
 
 class SongController extends Controller
@@ -18,7 +18,7 @@ class SongController extends Controller
     public function index()
     {
         //
-        $song = song::orderBy('created_at','DESC')->paginate(2);
+        $song = Song::orderBy('created_at','DESC')->paginate(2);
         return view('admin.song.index',compact('song'));
     }
 
@@ -28,9 +28,9 @@ class SongController extends Controller
     public function create()
     {
         //
-        $singer = singer::all();
-        $albums = album::all();
-        $categories = category::all();
+        $singer = Singer::all();
+        $albums = Album::all();
+        $categories = Category::all();
         return view('admin.song.add',compact('singer','albums','categories'));
     }
 
@@ -62,7 +62,7 @@ class SongController extends Controller
             $song['music_path'] = $audioName;
         }
         $request->merge(['music_path'=>$audioName]);
-        $songg = song::create($song);
+        $song = Song::create($song);
         return redirect()->route('song.index');
     }
 
@@ -80,17 +80,17 @@ class SongController extends Controller
     public function edit(string $id)
     {
         //
-        $singer = singer::all();
-        $albums = album::all();
-        $categories = category::all();
-        $songg = song::find($id);
+        $singer = Song::all();
+        $albums = Album::all();
+        $categories = Category::all();
+        $songg = Song::find($id);
         return view('admin.song.edit',compact('songg','singer','albums','categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(updateSong $request, string $id)
+    public function update(Request $request, string $id)
     {
         //
         $song = [
@@ -125,7 +125,7 @@ class SongController extends Controller
     public function destroy(string $id)
     {
         //
-        $songs = album::find($id)->delete();
+        $songs = Song::find($id)->delete();
         return redirect()->back();
     }
 }
