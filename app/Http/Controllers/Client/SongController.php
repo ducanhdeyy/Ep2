@@ -15,7 +15,8 @@ class SongController extends Controller
     {
         $songs = Song::all();
         foreach ($songs as $song){
-            $song['file_url'] = 'http://127.0.0.1:8000/uploads/'. $song->file_url;
+            $song['music_path'] =url('uploads/audio') . '/'. $song->music_path;
+            $song['image_path'] =url('uploads/img') . '/'. $song->image_path;
             $song['singer_name'] = $song->singer->name;
         }
         return response()->json($songs);
