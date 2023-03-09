@@ -10,6 +10,11 @@ class Song extends Model
     use HasFactory;
     protected $fillable = ['id','name','introduction','music_path','price','singer_id','albums_id','category_id','image_path'];
 
+    public function scopeSearch($query)
+    {
+        $search = request()->search;
+        return $query->where('name', 'like', "%$search%");
+    }
     public function singer()
     {
         return $this->belongsTo(singer::class);

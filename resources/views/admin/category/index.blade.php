@@ -10,6 +10,7 @@
     </div>
     <div class="iq-card-body">
         <div class="table-responsive">
+            <x-alert/>
             <table class="data-tables table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\createSong;
-use App\Http\Requests\updateSong;
+use App\Http\Requests\CreateSong;
+use App\Http\Requests\UpdateSong;
 use App\Models\Album;
 use App\Models\Category;
 use App\Models\Singer;
@@ -18,7 +18,7 @@ class SongController extends Controller
     public function index()
     {
         //
-        $song = Song::orderBy('created_at','DESC')->paginate(2);
+        $song = Song::orderBy('created_at','DESC')->search()->paginate(2);
         return view('admin.song.index',compact('song'));
     }
 
@@ -37,7 +37,7 @@ class SongController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(createSong $request)
+    public function store(CreateSong $request)
     {
         //
         $song = [
@@ -48,22 +48,23 @@ class SongController extends Controller
             'price'=>$request->price,
             'introduction'=>$request->introduction
         ];
-        if($request->hasFile('image')){
-            $file = $request->image;
+        if($request->hasFile('image_file')){
+            $file = $request->image_file;
             $imageName = $file->getClientOriginalName();
             $file->move(public_path('uploads/img'),$imageName);
             $song['image_path'] = $imageName;
         }
 
-        if($request->hasFile('audio')){
-            $file = $request->audio;
+        if($request->hasFile('audio_file')){
+            $file = $request->audio_file;
             $audioName = $file->getClientOriginalName();
             $file->move(public_path('uploads/audio'),$audioName);
             $song['music_path'] = $audioName;
         }
         $request->merge(['music_path'=>$audioName]);
-        $song = Song::create($song);
-        return redirect()->route('song.index');
+        return Song::create($song)
+            ? redirect()->route('song.index')->with('success', 'You are add success')
+            : redirect()->route('song.add')->with('error', 'You are add failed');
     }
 
     /**
@@ -80,7 +81,7 @@ class SongController extends Controller
     public function edit(string $id)
     {
         //
-        $singer = Song::all();
+        $singer = Singer::all();
         $albums = Album::all();
         $categories = Category::all();
         $songg = Song::find($id);
@@ -90,7 +91,7 @@ class SongController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateSong $request, string $id)
     {
         //
         $song = [
@@ -101,22 +102,22 @@ class SongController extends Controller
             'price'=>$request->price,
             'introduction'=>$request->introduction
         ];
-        if($request->hasFile('image')){
-            $file = $request->image;
+        if($request->hasFile('image_file')){
+            $file = $request->image_file;
             $imageName = $file->getClientOriginalName();
             $file->move(public_path('uploads/img'),$imageName);
             $song['image_path'] = $imageName;
         }
 
-        if($request->hasFile('audio')){
-            $file = $request->audio;
+        if($request->hasFile('audio_file')) {
+            $file = $request->audio_file;
             $audioName = $file->getClientOriginalName();
-            $file->move(public_path('uploads/audio'),$audioName);
+            $file->move(public_path('uploads/audio'), $audioName);
             $song['music_path'] = $audioName;
         }
-
-        $songg = song::find($id)->update($song);
-        return redirect()->route('song.index');
+        return Song::find($id)->update($song)
+            ? redirect()->route('song.index')->with('success', 'You are update success')
+            : redirect()->route('song.edit',$id)->with('error', 'You are update failed');
     }
 
     /**

@@ -22,9 +22,9 @@ class UpdateSinger extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|unique:singers',
+            'name'=>'required',
             'introduction'=>'required',
-            'file' => 'required'
+            'file' => 'nullable|image|mimes:jpeg,jpg,png,gif'
         ];
     }
 }

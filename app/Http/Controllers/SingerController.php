@@ -15,7 +15,7 @@ class SingerController extends Controller
     public function index()
     {
         //
-        $singer = Singer::orderBy('created_at','DESC')->paginate(2);
+        $singer = Singer::orderBy('created_at','DESC')->search()->paginate(2);
         return view('admin.singer.index',compact('singer'));
     }
 
@@ -33,17 +33,20 @@ class SingerController extends Controller
      */
     public function store(CreateSinger $request)
     {
-        //
+        $singer = [
+            'name'=>$request->name,
+            'dob'=>$request->dob,
+            'introduction'=>$request->introduction,
+        ];
         if($request->hasFile('file')){
             $file = $request->file;
-            $fileName = $file->getClientOriginalName();
-            $file->move(public_path('uploads/img'),$fileName);
-        }else{
-            $fileName = '';
+            $imageName = $file->getClientOriginalName();
+            $file->move(public_path('uploads/img'),$imageName);
+            $singer['image_path'] = $imageName;
         }
-        $request->merge(['image_path'=>$fileName]);
-        $singers = Singer::create($request->all());
-        return redirect()->route('singer.index');
+        return Singer::create($singer)
+            ? redirect()->route('singer.index')->with('success', 'You are add success')
+            : redirect()->route('singer.add')->with('error', 'You are add failed');
     }
 
     /**
@@ -67,19 +70,23 @@ class SingerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateSinger $request, string $id)
     {
         //
+        $singers = [
+            'name'=>$request->name,
+            'dob'=>$request->dob,
+            'introduction'=>$request->introduction,
+        ];
         if($request->hasFile('file')){
             $file = $request->file;
-            $fileName = $file->getClientOriginalName();
-            $file->move(public_path('uploads/img'),$fileName);
-        }else{
-            $fileName = '';
+            $imageName = $file->getClientOriginalName();
+            $file->move(public_path('uploads/img'),$imageName);
+            $singers['image_path'] = $imageName;
         }
-        $request->merge(['image_path'=>$fileName]);
-        $sing = Singer::find($id)->update($request->all());
-        return redirect()->route('singer.index');
+        return Singer::find($id)->update($singers)
+            ? redirect()->route('singer.index')->with('success', 'You are update success')
+            : redirect()->route('singer.edit', $id)->with('error', 'You are update failed');
     }
 
     /**
@@ -87,7 +94,7 @@ class SingerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
         $singer = Singer::find($id)->delete();
         return redirect()->back();
     }

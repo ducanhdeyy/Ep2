@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\createUser;
+use App\Http\Requests\CreateUser;
 use App\Http\Requests\updateUser;
+use App\Models\Album;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        $user = User::orderBy('created_at','DESC')->paginate(2);
+        $user = User::orderBy('created_at','DESC')->search()->paginate(2);
         return view('admin.user.index',compact('user'));
     }
 
@@ -31,17 +32,25 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(createUser $request)
+    public function store(CreateUser $request)
     {
         //
-        $users = User::create([
+        $users = [
             'name'=>$request->name,
             'email'=>$request->email,
             'phone_number'=>$request->phone_number,
             'password'=>bcrypt($request->password),
             'wallet'=>$request->wallet,
-        ]);
-        return redirect()->route('user.index');
+        ];
+        if($request->hasFile('file')){
+            $file=$request->file;
+            $imageName = $file->getClientOriginalName();
+            $file->move(public_path('uploads/img'),$imageName);
+            $users['image'] = $imageName;
+        }
+        return User::create($users)
+            ? redirect()->route('user.index')->with('success', 'You are add success')
+            : redirect()->route('user.add', $id)->with('error', 'You are add failed');
     }
 
     /**
@@ -68,14 +77,16 @@ class UserController extends Controller
     public function update(updateUser $request, string $id)
     {
         //
-        $userss = User::find($id)->update([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'phone_number'=>$request->phone_number,
+        $userss = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
             'password'=>bcrypt($request->password),
             'wallet'=>$request->wallet,
-        ]);
-        return redirect()->route('user.index');
+        ];
+        return User::find($id)->update($userss)
+            ? redirect()->route('user.index')->with('success', 'You are update success')
+            : redirect()->route('user.edit', $id)->with('error', 'You are update failed');
     }
 
     /**

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class updateCategory extends FormRequest
+class CreateAlbum extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class updateCategory extends FormRequest
         return [
             //
             'name'=>'required',
-            'description'=>'required'
+            'description'=>'nullable',
+            'file'=>'nullable'
         ];
     }
 }

@@ -15,7 +15,7 @@ class AlbumController extends Controller
     public function index()
     {
         //
-        $album = Album::orderBy('created_at', 'DESC')->paginate(2);
+        $album = Album::orderBy('created_at', 'DESC')->search()->paginate(2);
         return view('admin.album.index', compact('album'));
     }
 
@@ -44,11 +44,11 @@ class AlbumController extends Controller
             $file = $request->file;
             $imageName = $file->getClientOriginalName();
             $file->move(public_path('uploads/img'), $imageName);
-            $song['image_path'] = $imageName;
+            $albums['image_path'] = $imageName;
         }
         $request->merge(['image_path' => $imageName]);
-        $albums = Album::create($albums);
-        return redirect()->route('album.index');
+        return Album::create($albums) ? redirect()->route('album.index')->with('success', 'You are add success')
+            : redirect()->route('album.add')->with('error', 'You are add failed');
 
     }
 

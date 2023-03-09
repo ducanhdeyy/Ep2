@@ -9,4 +9,10 @@ class Singer extends Model
 {
     use HasFactory;
     protected $fillable = ['id','name','dob','introduction','image_path'];
+
+    public function scopeSearch($query)
+    {
+        $search = request()->search;
+        return $query->where('name', 'like', "%$search%");
+    }
 }

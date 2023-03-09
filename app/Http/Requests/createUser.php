@@ -23,11 +23,11 @@ class createUser extends FormRequest
     {
         return [
             //
-            'name'=>'required|unique:users',
+            'name'=>'required',
             'email'=>'required|email|unique:users',
             'phone_number'=>'required',
-            'password'=>'required',
-            'wallet'=>'required'
+            'file'=>'nullable|',
+            'wallet'=>'nullable'
         ];
     }
 }

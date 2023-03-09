@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\createCategory;
-use App\Http\Requests\updateCategory;
-use App\Models\category;
+use App\Http\Requests\CreateCategory;
+use App\Http\Requests\UpdateCategory;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $category = category::orderBy('created_at','DESC')->paginate(2);
+        $category =Category::orderBy('created_at','DESC')->search()->paginate(2);
         return view('admin.category.index',compact('category'));
     }
 
@@ -31,11 +31,15 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(createCategory $request)
+    public function store(CreateCategory $request)
     {
         //
-        $categories = category::create($request->all());
-        return redirect()->route('category.index');
+        $categories = [
+            'name'=>$request->name,
+            'description'=>$request->description
+        ];
+        return Category::create($categories) ? redirect()->route('category.index')->with('success', 'You are add success')
+            : redirect()->route('category.add')->with('error', 'You are add failed');
     }
 
     /**
@@ -52,18 +56,19 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         //
-        $cate = category::find($id);
+        $cate = Category::find($id);
         return view('admin.category.edit',compact('cate'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(updateCategory $request, string $id)
+    public function update(UpdateCategory $request, string $id)
     {
         //
-        $cate = category::find($id)->update($request->all());
-        return redirect()->route('category.index');
+        return Category::find($id)->update($request->all())
+            ? redirect()->route('category.index')->with('success', 'You are update success')
+            : redirect()->route('category.edit', $id)->with('error', 'You are update failed');
     }
 
     /**
@@ -72,7 +77,7 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         //
-        $category = category::find($id)->delete();
+        $category = Category::find($id)->delete();
         return redirect()->back();
     }
 }

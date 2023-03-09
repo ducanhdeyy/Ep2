@@ -7,7 +7,7 @@
     </div>
     <div class="iq-card-body">
         <x-alert/>
-        <form class="form-validate" method="post" action="{{route('user.store')}}">
+        <form class="form-validate" method="post" action="{{route('user.store')}}" enctype="multipart/form-data">
             @csrf
             <div class=" row align-items-center">
                 <div class="form-group col-sm-6">
@@ -18,6 +18,18 @@
                     <label for="lname">Email:</label>
                     <input type="email" class="form-control" name="email" id="lname" value="">
                 </div>
+                <div class="form-group col-sm-6">
+                    <label for="lname">Password:</label>
+                    <input type="password" class="form-control" name="password" id="lname" value="">
+                </div>
+                <div class="form-group col-sm-6">
+                    <label>User Profile:</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="file" id="image">
+                        <label class="custom-file-label" for="image">Choose file</label>
+                    </div>
+                </div>
+
                 <div class="form-group col-sm-6">
                     <label for="uname">Phone number:</label>
                     <input type="text" class="form-control" id="uname" name="phone_number" value="">

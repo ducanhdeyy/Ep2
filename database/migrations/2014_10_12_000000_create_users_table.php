@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->integer('wallet')->nullable();
             $table->integer('role')->default(0);
+            $table->string('image');
             $table->timestamps();
         });
     }

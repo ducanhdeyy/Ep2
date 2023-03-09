@@ -45,7 +45,7 @@
             <div class="form-group">
                 <label>Song Image:</label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="image" id="image">
+                    <input type="file" class="custom-file-input" name="image_file" id="image">
                     <label class="custom-file-label text-secondary" for="image">Choose image file</label>
                 </div>
             </div>
@@ -55,7 +55,7 @@
             <div class="form-group">
                 <label>Song Audio:</label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="audio" id="audio">
+                    <input type="file" class="custom-file-input" name="audio_file" id="audio">
                     <label class="custom-file-label text-secondary" for="audio">Choose music file</label>
                 </div>
             </div>

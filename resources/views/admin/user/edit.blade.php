@@ -20,8 +20,22 @@
                     <input type="email" class="form-control" name="email" id="lname" value="{{$userss->email}}">
                 </div>
                 <div class="form-group col-sm-6">
+                    <label>Album Profile:</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="file" id="image">
+                        <label class="custom-file-label" for="image">Choose file</label>
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <img src="{{url('uploads/img') .'/'. (Auth::user()->image?? 'user.png') }}" width="100" height="100" alt="">
+                </div>
+                <div class="form-group col-sm-6">
                     <label for="uname">Phone number:</label>
                     <input type="text" class="form-control" id="uname" name="phone_number" value="{{$userss->phone_number}}">
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="uname">Password:</label>
+                    <input type="password" class="form-control" id="uname" name="password" value="{{$userss->password}}">
                 </div>
                 <div class="form-group col-sm-6">
                     <label for="uname">Wallet:</label>

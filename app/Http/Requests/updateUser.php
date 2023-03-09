@@ -23,11 +23,11 @@ class updateUser extends FormRequest
     {
         return [
             //
-            'name'=>'required|unique:users',
-            'email'=>'required|email|unique:users',
+            'name'=>'required',
+            'email'=>'required|email',
             'phone_number'=>'required',
-            'password'=>'required',
-            'wallet'=>'required'
+            'file'=>'nullable',
+            'wallet'=>'nullable'
         ];
     }
 }

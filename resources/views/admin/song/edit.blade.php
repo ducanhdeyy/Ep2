@@ -2,7 +2,7 @@
 @section('content')
     <div class="iq-card-header d-flex justify-content-between">
         <div class="iq-header-title">
-            <h4 class="card-title">Add Song</h4>
+            <h4 class="card-title">Edit Song</h4>
         </div>
     </div>
     <div class="iq-card-body">
@@ -46,7 +46,7 @@
             <div class="form-group">
                 <label>Song Image:</label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="image" id="image">
+                    <input type="file" class="custom-file-input" name="image_file" id="image">
                     <label class="custom-file-label text-secondary" for="image">Choose image file</label>
                 </div>
             </div>
@@ -56,7 +56,7 @@
             <div class="form-group">
                 <label>Song Audio:</label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="audio" id="audio">
+                    <input type="file" class="custom-file-input" name="audio_file" id="audio">
                     <label class="custom-file-label text-secondary" for="audio">Choose music file</label>
                     <audio src="{{url('uploads/audio')}}/{{$songg->music_path}}"></audio>
                 </div>
@@ -70,7 +70,7 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <button type="reset" class="btn btn-danger">Reset</button>
                 </div>
-                <a href="index.php?controller=song" class="text-white btn btn-secondary">Cancel</a>
+                <a href="" class="text-white btn btn-secondary">Cancel</a>
             </div>
         </form>
     </div>
