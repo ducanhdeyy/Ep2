@@ -14,7 +14,9 @@ class SingerController extends Controller
     public function index()
     {
         $singers = Singer::all();
-
+        foreach ($singers as $singer){
+            $singer['image_path'] = url('uploads/img') . '/'. $singer->image_path;
+        }
         return response()->json($singers);
     }
 

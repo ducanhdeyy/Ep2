@@ -14,7 +14,9 @@ class AlbumController extends Controller
     public function index()
     {
         $albums = Album::all();
-
+        foreach ($albums as $album){
+            $album['image_path'] = url('uploads/img') . '/'. $album->image_path;
+        }
         return response()->json($albums);
     }
 

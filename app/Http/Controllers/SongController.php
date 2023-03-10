@@ -127,6 +127,6 @@ class SongController extends Controller
     {
         //
         $songs = Song::find($id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', "You are delete successfully");
     }
 }
