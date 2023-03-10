@@ -30,7 +30,7 @@
                             <td>{{ $users->id }}</td>
                             <td>{{ $users->name }}</td>
                             <td>{{ $users->email }}</td>
-                            <td><img src="{{url('uploads/img') .'/'. (Auth::user()->image?? 'user.png') }}" class="img-fluid avatar-50 rounded" alt="author-profile"></td>
+                            <td><img src="{{url('uploads/img') .'/'. ($users->image?? 'user.png') }}" class="img-fluid avatar-50 rounded" alt="author-profile"></td>
                             <td>{{ $users->phone_number }}</td>
                             <td>{{$users->password}}</td>
                             <td class="text-right">{{ $users->wallet }}</td>
@@ -42,7 +42,7 @@
                                     <form action="{{route('user.destroy',$users)}}" method="post" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="bg-primary" data-toggle="tooltip" data-placement="top" title=""
+                                        <button onclick="return confirm('Are you sure !')" class="bg-primary" data-toggle="tooltip" data-placement="top" title=""
                                             data-original-title="Delete" href=""><i
                                                 class="ri-delete-bin-line"></i></button>
                                     </form>

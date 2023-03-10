@@ -1,6 +1,7 @@
 @extends('admin.layout.main')
 @section('content')
     <div class="iq-card-header d-flex justify-content-between">
+        <x-alert/>
         <div class="iq-header-title">
             <h4 class="card-title">Add Category</h4>
         </div>

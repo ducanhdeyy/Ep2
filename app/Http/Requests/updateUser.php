@@ -25,8 +25,9 @@ class updateUser extends FormRequest
             //
             'name'=>'required',
             'email'=>'required|email',
+            'password'=>'required',
             'phone_number'=>'required',
-            'file'=>'nullable',
+            'file'=>'required',
             'wallet'=>'nullable'
         ];
     }

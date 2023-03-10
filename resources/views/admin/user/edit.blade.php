@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="form-group col-sm-6">
-                    <img src="{{url('uploads/img') .'/'. (Auth::user()->image?? 'user.png') }}" width="100" height="100" alt="">
+                    <img src="{{url('uploads/img') .'/'. ($userss->image?? 'user.png') }}" width="100" height="100" alt="">
                 </div>
                 <div class="form-group col-sm-6">
                     <label for="uname">Phone number:</label>

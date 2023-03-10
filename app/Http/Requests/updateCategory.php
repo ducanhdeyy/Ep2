@@ -24,7 +24,7 @@ class updateCategory extends FormRequest
         return [
             //
             'name'=>'required',
-            'description'=>'required'
+            'description'=>'nullable'
         ];
     }
 }

@@ -11,7 +11,7 @@
                 @forelse ($transactions as $trans)
                     <li>{{ $trans->name }}</li>
                 @empty
-                    <img src="{{asset('view/images/wellcome.png')}}" alt="">
+                    <img src="{{asset('uploads/img/empty.png')}}" alt="" style="width: 100%;height: 100%">
                 @endforelse
             </table>
         </div>

@@ -22,9 +22,10 @@ class UpdateAlbum extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
+            'name' => ['required','string','max:255','regex:/^[\pL\s\-]+$/u'],
             'singer_id' => 'required |numeric',
-            'file' => 'image|mimes:jpeg,jpg,png,gif'
+            'description'=>'nullable',
+            'file'=>'required|image|mimes:jpeg,jpg,png,gif|max:2048'
         ];
     }
 }

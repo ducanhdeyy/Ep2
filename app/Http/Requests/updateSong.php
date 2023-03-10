@@ -22,7 +22,7 @@ class updateSong extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'name' => 'required|string|max:255',
+            'name' => ['required','string','max:255','regex:/^[a-zA-Z\s]*$/'],
             'singer_id' => 'required',
             'albums_id' => 'required',
             'category_id' => 'required',

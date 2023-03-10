@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateSinger;
 use App\Http\Requests\UpdateSinger;
 use App\Models\Singer;
+use App\Models\Song;
 use Illuminate\Http\Request;
 
 class SingerController extends Controller
@@ -94,7 +95,9 @@ class SingerController extends Controller
      */
     public function destroy(string $id)
     {
-
+        if (Song::where('singer_id', $id)->get()->count() > 0){
+            return redirect()->back()->with('error', 'Singer have song not delete');
+        }
         $singer = Singer::find($id)->delete();
         return redirect()->back();
     }

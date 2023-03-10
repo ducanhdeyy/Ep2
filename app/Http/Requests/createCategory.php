@@ -23,8 +23,8 @@ class createCategory extends FormRequest
     {
         return [
             //
-            'name'=> 'required|unique:categories|',
-            'description'=> 'required'
+            'name'=> ['required','string','max:255','regex:/^[\pL\s\-]+$/u'],
+            'description'=> 'nullable'
         ];
     }
 }

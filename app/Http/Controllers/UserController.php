@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUser;
-use App\Http\Requests\updateUser;
+use App\Http\Requests\UpdateUser;
 use App\Models\Album;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -43,14 +43,14 @@ class UserController extends Controller
             'wallet'=>$request->wallet,
         ];
         if($request->hasFile('file')){
-            $file=$request->file;
+            $file=$request->file('file');
             $imageName = $file->getClientOriginalName();
             $file->move(public_path('uploads/img'),$imageName);
             $users['image'] = $imageName;
         }
         return User::create($users)
             ? redirect()->route('user.index')->with('success', 'You are add success')
-            : redirect()->route('user.add', $id)->with('error', 'You are add failed');
+            : redirect()->route('user.add')->with('error', 'You are add failed');
     }
 
     /**
@@ -74,16 +74,23 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(updateUser $request, string $id)
+    public function update(UpdateUser $request, string $id)
     {
         //
         $userss = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone_number' => $request->phone_number,
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'phone_number'=>$request->phone_number,
             'password'=>bcrypt($request->password),
             'wallet'=>$request->wallet,
         ];
+        if($request->hasFile('file')){
+            $file=$request->file('file');
+            $imageName = $file->getClientOriginalName();
+            $file->move(public_path('uploads/img'),$imageName);
+            $userss['image'] = $imageName;
+        }
+
         return User::find($id)->update($userss)
             ? redirect()->route('user.index')->with('success', 'You are update success')
             : redirect()->route('user.edit', $id)->with('error', 'You are update failed');

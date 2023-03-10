@@ -23,9 +23,10 @@ class CreateAlbum extends FormRequest
     {
         return [
             //
-            'name'=>'required',
+            'name'=>['required','string','max:255','regex:/^[\pL\s\-]+$/u'],
+            'singer_id' => 'required |numeric',
             'description'=>'nullable',
-            'file'=>'nullable'
+            'file'=>'required|image|mimes:jpeg,jpg,png,gif|max:2048'
         ];
     }
 }

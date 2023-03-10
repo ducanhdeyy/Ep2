@@ -24,7 +24,7 @@ class UpdateSinger extends FormRequest
         return [
             'name'=>'required',
             'introduction'=>'required',
-            'file' => 'nullable|image|mimes:jpeg,jpg,png,gif'
+            'file' => 'required|image|mimes:jpeg,jpg,png,gif'
         ];
     }
 }

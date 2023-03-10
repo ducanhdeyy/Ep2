@@ -25,8 +25,9 @@ class createUser extends FormRequest
             //
             'name'=>'required',
             'email'=>'required|email|unique:users',
+            'password'=>'required',
             'phone_number'=>'required',
-            'file'=>'nullable|',
+            'file'=>'required|image|max:2048',
             'wallet'=>'nullable'
         ];
     }

@@ -36,7 +36,7 @@
                                     <form action="{{route('category.destroy',$cate)}}" method="post" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="bg-primary" data-toggle="tooltip" data-placement="top" title=""
+                                        <button onclick="return confirm('Are you sure !')" class="bg-primary" data-toggle="tooltip" data-placement="top" title=""
                                             data-original-title="Delete" href=""><i
                                                 class="ri-delete-bin-line"></i></button>
                                     </form>

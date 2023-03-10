@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('songs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('introduction');
+            $table->text('introduction')->nullable();
             $table->string('music_path');
             $table->float('price');
             $table->unsignedBigInteger('singer_id');

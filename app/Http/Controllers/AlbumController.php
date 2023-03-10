@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateAlbum;
 use App\Http\Requests\UpdateAlbum;
 use App\Models\Album;
 use App\Models\Singer;
@@ -32,7 +33,7 @@ class AlbumController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateAlbum $request)
     {
         //
         $albums = [
@@ -41,14 +42,14 @@ class AlbumController extends Controller
             'singer_id' => $request->singer_id
         ];
         if ($request->hasFile('file')) {
-            $file = $request->file;
+            $file = $request->file('file');
             $imageName = $file->getClientOriginalName();
             $file->move(public_path('uploads/img'), $imageName);
             $albums['image_path'] = $imageName;
         }
         $request->merge(['image_path' => $imageName]);
         return Album::create($albums) ? redirect()->route('album.index')->with('success', 'You are add success')
-            : redirect()->route('album.add')->with('error', 'You are add failed');
+            : redirect()->back()->with('error', 'You are add failed');
 
     }
 
@@ -84,7 +85,7 @@ class AlbumController extends Controller
         ];
 
         if ($request->hasFile('file')) {
-            $file = $request->file;
+            $file = $request->file('file');
             $imageName = $file->getClientOriginalName();
             $file->move(public_path('uploads/img'), $imageName);
             $album['image_path'] = $imageName;
