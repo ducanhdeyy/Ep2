@@ -22,12 +22,14 @@ class createSong extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'name' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z\s]*$/'],
+            'name' => ['required','string','min:3','max:50','regex:/^[A-Za-z0-9\sàáạảãăắằẳẵặâấầẩẫậèéẹẻẽêếềểễệđĐìíịỉĩóỏòọõôốồổỗộơớờởỡợùúụủũưứừửữựỳýỵỷỹú]+$/u'],
             'singer_id' => 'required',
             'albums_id' => 'required',
             'category_id' => 'required',
             'price' => 'required|numeric|min:0',
-            'introduction' => 'nullable|string|max:500',
+            'image_file'=>'required',
+            'audio_file'=>'required',
+            'introduction' => 'nullable',
         ];
 
         if ($this->hasFile('image_file')) {

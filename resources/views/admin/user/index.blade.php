@@ -15,25 +15,21 @@
                 <thead>
                     <tr>
                         <th style="width: 5%;">No</th>
-                        <th style="width: 15%;">Name</th>
-                        <th style="width: 10%;">Email</th>
+                        <th style="width: 10%;">Name</th>
+                        <th style="width: 15%;">Email</th>
                         <th style="width: 10%">Image</th>
                         <th style="width: 10%;">Phone number</th>
-                        <th style="width: 10%;">Password</th>
-                        <th style="width: 10%;" class="text-right">Wallet</th>
                         <th style="width: 10%;" class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($user as $users)
                         <tr>
-                            <td>{{ $users->id }}</td>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $users->name }}</td>
                             <td>{{ $users->email }}</td>
                             <td><img src="{{url('uploads/img') .'/'. ($users->image?? 'user.png') }}" class="img-fluid avatar-50 rounded" alt="author-profile"></td>
                             <td>{{ $users->phone_number }}</td>
-                            <td>{{$users->password}}</td>
-                            <td class="text-right">{{ $users->wallet }}</td>
                             <td class="text-center stick">
                                 <div class="flex align-items-center list-user-action">
                                     <a class="bg-primary" data-toggle="tooltip" data-placement="top" title=""

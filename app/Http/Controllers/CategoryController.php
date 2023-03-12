@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateCategory;
 use App\Http\Requests\UpdateCategory;
 use App\Models\Category;
+use App\Models\Song;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -77,6 +78,9 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         //
+        if (Song::where('category_id', $id)->get()->count() > 0){
+            return redirect()->back()->with('error', 'Category have song not delete');
+        }
         $category = Category::find($id)->delete();
         return redirect()->back();
     }

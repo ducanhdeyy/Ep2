@@ -23,7 +23,7 @@ class createUser extends FormRequest
     {
         return [
             //
-            'name'=>'required',
+            'name'=> ['required','string','min:3','max:50','regex:/^[A-Za-z0-9\sàáạảãăắằẳẵặâấầẩẫậèéẹẻẽêếềểễệđĐìíịỉĩóỏòọõôốồổỗộơớờởỡợùúụủũưứừửữựỳýỵỷỹú]+$/u'],
             'email'=>'required|email|unique:users',
             'password'=>'required',
             'phone_number'=>'required',

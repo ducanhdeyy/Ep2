@@ -39,16 +39,21 @@
                         <div class="sign-in-page-data">
                             <div class="sign-in-from w-100 pt-5 m-auto">
                                 <h1 class="mb-3 text-center">Sign in</h1>
-                                <x-alert/>
                                 <form class="mt-4 form-validate" method="post" action="{{route('admin.login')}}">
                                     @csrf
                                     <div class="form-group">
                                         <label for="exampleInputEmail2">Email address</label>
                                         <input type="email" name="email" class="form-control mb-0" id="exampleInputEmail2" placeholder="Enter email">
+                                        @error('email')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword2">Password</label>
                                         <input type="password" name="password" class="form-control mb-0" id="exampleInputPassword2" placeholder="Password">
+                                        @error('password')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="sign-info">
                                         <button type="submit" class="btn btn-primary mb-2">Sign in</button>
@@ -60,7 +65,7 @@
                                             <input type="checkbox" class="custom-control-input" id="customCheck1">
                                             <label class="custom-control-label" for="customCheck1">Remember Me</label>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </form>
                             </div>
                         </div>

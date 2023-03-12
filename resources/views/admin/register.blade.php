@@ -39,24 +39,35 @@
                         <div class="sign-in-page-data">
                             <div class="sign-in-from w-100 m-auto pt-5">
                                 <h1 class="mb-3 text-center">Sign Up</h1>
-                                <x-alert/>
                                 <form class="mt-4 form-validate" method="post" action="{{route('admin.store')}}">
                                     @csrf
                                     <div class="form-group">
                                         <label for="exampleInputEmail2">Your Full Name</label>
                                         <input type="text" name="name" class="form-control mb-0" id="exampleInputEmail2" placeholder="Your Full Name">
+                                        @error('name')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail3">Email address</label>
                                         <input type="email" name="email" class="form-control mb-0" id="exampleInputEmail3" placeholder="Enter email">
+                                        @error('email')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail3">Phone number</label>
                                         <input type="text" name="phone_number" class="form-control mb-0" id="exampleInputEmail3" placeholder="Enter phone number">
+                                        @error('phone_number')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword2">Password</label>
                                         <input type="password" name="password" class="form-control mb-0" id="password" placeholder="Password">
+                                        @error('password')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="sign-info text-danger">
                                     </div>

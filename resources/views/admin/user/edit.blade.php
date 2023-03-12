@@ -7,7 +7,7 @@
     </div>
     <div class="iq-card-body">
         <x-alert/>
-        <form class="form-validate" method="post" action="{{route('user.update',$userss)}}">
+        <form class="form-validate" method="post" action="{{route('user.update',$userss)}}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class=" row align-items-center">
@@ -17,17 +17,17 @@
                 </div>
                 <div class="form-group col-sm-6">
                     <label for="lname">Email:</label>
-                    <input type="email" class="form-control" name="email" id="lname" value="{{$userss->email}}">
+                    <input type="email" class="form-control" name="email" id="lname" value="{{$userss->email}}" disabled>
                 </div>
                 <div class="form-group col-sm-6">
                     <label>Album Profile:</label>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="file" id="image">
+                        <input type="file" class="custom-file-input" name="file" id="image" accept=".png,jpg,jpeg,gif">
                         <label class="custom-file-label" for="image">Choose file</label>
                     </div>
                 </div>
                 <div class="form-group col-sm-6">
-                    <img src="{{url('uploads/img') .'/'. ($userss->image?? 'user.png') }}" width="100" height="100" alt="">
+                    <img src="{{url('uploads/img')}}/{{$userss->image?? 'user.png'}}" width="100" height="100" alt="">
                 </div>
                 <div class="form-group col-sm-6">
                     <label for="uname">Phone number:</label>

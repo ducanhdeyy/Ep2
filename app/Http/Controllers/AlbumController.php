@@ -6,6 +6,7 @@ use App\Http\Requests\CreateAlbum;
 use App\Http\Requests\UpdateAlbum;
 use App\Models\Album;
 use App\Models\Singer;
+use App\Models\Song;
 use Illuminate\Http\Request;
 
 class AlbumController extends Controller
@@ -101,6 +102,9 @@ class AlbumController extends Controller
     public function destroy(string $id)
     {
         //
+        if (Song::where('albums_id', $id)->get()->count() > 0){
+            return redirect()->back()->with('error', 'Album have song not delete');
+        }
         $albums = Album::find($id)->delete();
         return redirect()->back();
     }

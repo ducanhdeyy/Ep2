@@ -25,7 +25,7 @@
                 <div class="form-group col-sm-6">
                     <label>User Profile:</label>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="file" id="image">
+                        <input type="file" class="custom-file-input" name="file" id="image" accept=".jpg.jpeg.png">
                         <label class="custom-file-label" for="image">Choose file</label>
                     </div>
                 </div>

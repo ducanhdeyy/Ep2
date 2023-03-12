@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label>Album Profile:</label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="file" id="image">
+                    <input type="file" class="custom-file-input" name="file" id="image" accept=".jpeg,png,gif,jpg">
                     <label class="custom-file-label" for="image">Choose file</label>
                 </div>
             </div>

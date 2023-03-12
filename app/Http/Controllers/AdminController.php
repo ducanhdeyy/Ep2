@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\createUser;
+use App\Http\Requests\CreateUser;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,7 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(createUser $request)
+    public function store(RegisterRequest $request)
     {
         //
         $auth = [
@@ -91,7 +92,7 @@ class AdminController extends Controller
             'password'=>$request->password
         ])){
             return redirect()->route('dashboard');
-        }return redirect()->back();
+        }return redirect()->back()->withErrors(['email'=>'Invalid email or password']);
     }
 
     public function logout()

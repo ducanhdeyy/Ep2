@@ -23,7 +23,7 @@ class CreateSinger extends FormRequest
     {
         return [
             //
-            'name'=>['required','string','max:255','regex:/^[\pL\s\-]+$/u'],
+            'name'=>['required','string','min:3','max:50','regex:/^[A-Za-z0-9\sàáạảãăắằẳẵặâấầẩẫậèéẹẻẽêếềểễệđĐìíịỉĩóỏòọõôốồổỗộơớờởỡợùúụủũưứừửữựỳýỵỷỹú]+$/u'],
             'introduction'=>'nullable',
             'file' => 'required'
         ];

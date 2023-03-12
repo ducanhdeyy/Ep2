@@ -29,7 +29,7 @@
                 <tbody>
                     @foreach ($song as $value)
                         <tr>
-                            <td>{{ $value->id }}</td>
+                            <td>{{ $loop->iteration }}</td>
                             <td class="text-center">
                                 <img src="{{ url('uploads/img') }}/{{ $value->image_path }}"
                                     class="img-fluid avatar-50 rounded" alt="author-profile">

@@ -25,7 +25,7 @@
                 <tbody>
                     @foreach ($singer as $sing)
                         <tr>
-                            <td>{{ $sing->id }}</td>
+                            <td>{{ $loop->iteration}}</td>
                             <td>
                                 <img src="{{ url('uploads/img') }}/{{ $sing->image_path }}"
                                     class="img-fluid avatar-50 rounded" alt="author-profile">

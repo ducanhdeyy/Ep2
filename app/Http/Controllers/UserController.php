@@ -79,15 +79,14 @@ class UserController extends Controller
         //
         $userss = [
             'name'=>$request->name,
-            'email'=>$request->email,
             'phone_number'=>$request->phone_number,
             'password'=>bcrypt($request->password),
             'wallet'=>$request->wallet,
         ];
-        if($request->hasFile('file')){
-            $file=$request->file('file');
+        if($request->hasFile('file')) {
+            $file = $request->file('file');
             $imageName = $file->getClientOriginalName();
-            $file->move(public_path('uploads/img'),$imageName);
+            $file->move(public_path('uploads/img'), $imageName);
             $userss['image'] = $imageName;
         }
 

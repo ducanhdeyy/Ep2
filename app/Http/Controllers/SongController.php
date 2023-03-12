@@ -18,7 +18,7 @@ class SongController extends Controller
     public function index()
     {
         //
-        $song = Song::orderBy('created_at','DESC')->search()->paginate(2);
+        $song = Song::orderBy('created_at','DESC')->search()->paginate(8);
         return view('admin.song.index',compact('song'));
     }
 
@@ -61,7 +61,6 @@ class SongController extends Controller
             $file->move(public_path('uploads/audio'),$audioName);
             $song['music_path'] = $audioName;
         }
-        $request->merge(['music_path'=>$audioName]);
         return Song::create($song)
             ? redirect()->route('song.index')->with('success', 'You are add success')
             : redirect()->route('song.add')->with('error', 'You are add failed');

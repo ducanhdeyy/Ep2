@@ -23,11 +23,11 @@ class updateUser extends FormRequest
     {
         return [
             //
-            'name'=>'required',
-            'email'=>'required|email',
+            'name'=> ['required','string','min:3','max:50','regex:/^[A-Za-z0-9\sàáạảãăắằẳẵặâấầẩẫậèéẹẻẽêếềểễệđĐìíịỉĩóỏòọõôốồổỗộơớờởỡợùúụủũưứừửữựỳýỵỷỹú]+$/u'],
+            'email'=>'nullable',
             'password'=>'required',
             'phone_number'=>'required',
-            'file'=>'required',
+            'file'=>'nullable',
             'wallet'=>'nullable'
         ];
     }

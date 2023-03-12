@@ -1,7 +1,6 @@
 @extends('admin.layout.main')
 @section('content')
     <div class="iq-card-header d-flex justify-content-between">
-        <x-alert/>
         <div class="iq-header-title">
             <h4 class="card-title">Add Singer</h4>
         </div>
@@ -21,7 +20,7 @@
             <div class="form-group">
                 <label>Singer Profile:</label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="file" id="image">
+                    <input type="file" class="custom-file-input" name="file" id="image" accept=".jpeg,png,gif">
                     <label class="custom-file-label" for="image">Choose file</label>
                 </div>
             </div>

@@ -80,7 +80,7 @@ class SingerController extends Controller
             'introduction'=>$request->introduction,
         ];
         if($request->hasFile('file')){
-            $file = $request->file;
+            $file = $request->file('file');
             $imageName = $file->getClientOriginalName();
             $file->move(public_path('uploads/img'),$imageName);
             $singers['image_path'] = $imageName;
